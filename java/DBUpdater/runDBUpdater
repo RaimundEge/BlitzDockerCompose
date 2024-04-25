@@ -1,0 +1,7 @@
+#! /bin/sh
+sleep 60
+# keep updating csci467 database
+while [ true ]; do
+  java -cp ".:mariadb-java-client-3.3.3.jar" DBUpdater
+  sleep 80
+done

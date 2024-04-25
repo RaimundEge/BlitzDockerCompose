@@ -1,0 +1,41 @@
+sudo su
+mysql -u root
+SHOW DATABASES;
+DROP DATABASE DemoDB; // done
+Delete FROM logrecords WHERE TIMESTAMP < NOW() -  INTERVAL 150 DAY; // done
+
+// individual db dumps
+mysqldump --databases Encrypt Payroll csci350 csci467 > backup-042024.sql
+// add to dump file to re-create users and grant
+CREATE USER 'student'@'%' IDENTIFIED BY 'student';
+CREATE USER 'instructor'@'%' IDENTIFIED BY 'instructor';
+GRANT ALL PRIVILEGES ON *.* TO `instructor`@`%`;
+GRANT USAGE ON *.* TO `student`@`%`;
+GRANT SELECT ON `csci467`.* TO `student`@`%`;
+
+// now using docker compose
+// all in directory BlitzDockerCompose
+
+==============================  old below here ================
+// create new mariadb docker image
+docker run --name blitzdb -e MYSQL_ROOT_PASSWORD=risingsun -p 3306:3306 -d mariadb
+// connect to docker container
+docker exec -it blitzdb bash
+// get containers IP number
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' blitzdb
+// restore DBs from individual dumps
+mysql -u root -h 172.17.0.2 -e "source backup-042024.sql" -p
+// get container id
+docker ps
+// save container as image
+docker commit 403b676f4f29 blitzdbimage
+docker save -o blitzdbimage.tar  blitzdbimage
+
+// on blitz install docker
+// run docker mariadb image
+docker load -i <path to image tar file>
+
+docker run --name phpmyadmin -d --link blitzdb:db -p 8080:80 phpmyadmin
+
+docker pull mongo
+

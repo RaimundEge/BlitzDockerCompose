@@ -1,0 +1,38 @@
+services:
+
+   blitzdb:
+      build: blitzdb/.
+      ports:
+         - "3306:3306"
+      restart: always
+
+   pma:
+      image: phpmyadmin
+      ports:
+         - "8080:80"
+      environment:
+         - PMA_HOST=blitzdb
+      restart: always
+      depends_on:
+         - blitzdb
+
+   mongodb:
+      image: mongo
+      ports:
+         - "27017:27017"
+      restart: always
+
+   java:
+      build: java/.
+      restart: always
+      depends_on:
+         - blitzdb
+
+   express:
+      build: express/.
+      restart: always
+      ports:
+         - "3000:3000"
+      depends_on:
+         - blitzdb
+         - mongodb

@@ -1,0 +1,12 @@
+[Unit]
+Description=Node.js Server for creditcard purchaseorder processing
+
+[Service]
+Type=simple
+WorkingDirectory=/home/www/html/Processors
+Environment=NODE_ENV=production PORT=3000
+ExecStart="/home/www/html/Processors/run"
+Restart=always
+
+[Install]
+WantedBy=network-online.target

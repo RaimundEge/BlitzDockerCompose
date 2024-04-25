@@ -1,0 +1,7 @@
+FROM node:latest
+ENV TZ=America/Chicago
+WORKDIR /workdir/
+COPY Processors /workdir/
+RUN npm install
+CMD [ "node", "app.js" ]
+EXPOSE 3000
