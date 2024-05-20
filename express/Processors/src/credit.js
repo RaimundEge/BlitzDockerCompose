@@ -12,7 +12,7 @@ export default async (request, response) => {
         errors.push(...checkExp(ccData.exp));
     }
     if (errors.length === 0) {
-        if (await find("credit", ccData)) {
+        if (await find("credit", { trans: ccData.trans })) {
             errors.push("transaction already exists");
         }
     }

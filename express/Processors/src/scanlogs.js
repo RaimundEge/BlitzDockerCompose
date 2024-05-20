@@ -1,10 +1,10 @@
-import { getLogRecords, getLogRecord } from "./maria.js";
+import { getLogRecords, getLogRecord } from "./mongo.js";
 
 async function getScanLogRecords(request, response) {
     // process month count
     var month = 3;
     if (request.query.month !== undefined) {
-        month = request.query.month
+        month = parseInt(request.query.month);
     }
     // query and wait
     var rows = await getLogRecords(month);
@@ -20,7 +20,7 @@ async function getScanLogRecord(request, response) {
     }
     // query and wait
     var row = await getLogRecord(id);
-    console.log('found: ' + row);
+    // console.log('found: ' + row);
     response.send(row);   
 }
 

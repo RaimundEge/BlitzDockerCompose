@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import { sub } from 'date-fns';
 import "./env.js";
 
@@ -6,9 +6,9 @@ const dbPromise = MongoClient.connect(process.env.MONGO_URL);
 
 async function find(collection, keys) {
   const db = await dbPromise.then((client) => client.db("csci467"));
-  // console.log('checking: ' + collection, keys);
+  console.log('checking: ' + collection, keys);
   const result = await db.collection(collection).findOne(keys);
-  // console.log(result)
+  console.log(result)
   return (result !== null);
 }
 
@@ -57,22 +57,24 @@ async function getAllWine(range) {
 }
 
 async function getLogRecords(recent) {
+  console.log("recent: " + recent);
   const db = await dbPromise.then((client) => client.db("csci350"));
   var compare = new Date();
   compare = sub(compare, { months: recent });
-  var search = {"timeStamp": { "$gt": compare.getTime()}}; 
+  var search = {"timestamp": { $gt: compare }}; 
   console.log(search);
-  const result = await db.collection("logrecords").find(search, {sort: [["timeStamp", "desc"]]}).toArray();
-  console.log(result);
+  var projection = { timestamp: 1, groupName: 1, type: 1, IP: 1, port: 1};
+  // console.log(projection);
+  const result = await db.collection("logrecords").find(search).project(projection).sort(["timestamp", "desc"]).toArray();
+  // console.log(result);
   return result;
 }
 
 async function getLogRecord(id) { 
   const db = await dbPromise.then((client) => client.db("csci350"));
-  const result = await db.collection(collection).findOne(id);
+  const result = await db.collection("logrecords").findOne({"_id": new ObjectId(id)});
   console.log(result)
   return result;
 }
 
-
-export { find, insert, getAll, getAllWine, getLogRecords };
+export { find, insert, getAll, getAllWine, getLogRecords, getLogRecord };

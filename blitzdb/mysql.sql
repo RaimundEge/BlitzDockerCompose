@@ -3852,7 +3852,6 @@ CREATE USER 'instructor'@'%' IDENTIFIED BY 'instructor';
 GRANT ALL PRIVILEGES ON *.* TO `instructor`@`%`;
 GRANT USAGE ON *.* TO `student`@`%`;
 GRANT SELECT ON `csci467`.* TO `student`@`%`;
-GRANT SELECT ON `csci350`.* TO `student`@`%`;
 
 FLUSH PRIVILEGES;
 

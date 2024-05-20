@@ -11,7 +11,7 @@ export default async (request, response) => {
         errors = await check(poData);
     }
     if (errors.length === 0) {
-        if (await find("order", poData)) {
+        if (await find("order", { order: poData.order })) {
             errors.push("transaction already exists");
         }
     }
