@@ -7,5 +7,8 @@ ENV MYSQL_ROOT_PASSWORD=risingsun
 # enable remote network access
 COPY .my.cnf /root/
 
-# Copy the backup script into the Docker image
-COPY mysql.sql /docker-entrypoint-initdb.d/
+# set the location of the data
+VOLUME /home/backup/DockerData/mysql
+
+# Copy the backup script into the Docker image -- no longer needed
+# COPY mysql.sql /docker-entrypoint-initdb.d/

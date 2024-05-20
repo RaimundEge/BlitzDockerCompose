@@ -5,6 +5,8 @@ services:
       ports:
          - "3306:3306"
       restart: always
+      volumes:
+         - '/home/backup/DockerData/mysql:/var/lib/mysql'
 
    pma:
       image: phpmyadmin
