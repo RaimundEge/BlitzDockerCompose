@@ -6,9 +6,9 @@ Repository to hold complete Blitz setup for CSCI 350 and CSCI 467
 - Java server to update parts and customer databases
 - Express server for credit card and purchase orders, portscanlog and wine room temperature records lookup
 ## Setup
- install docker, docker compose, Java JDK
- create express>>Processors .env file with DB access detail (see example.env)
+    install docker, docker compose, Java JDK
+    create express>>Processors .env file with DB access detail (see example.env)
 ## Run
- docker compose build
- docker compose up -d
- docker compose down
+    docker compose build
+    docker compose up -d
+    docker compose down
