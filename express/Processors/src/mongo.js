@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { subHours } from 'date-fns';
+import { sub } from 'date-fns';
 import "./env.js";
 
 const dbPromise = MongoClient.connect(process.env.MONGO_URL);
@@ -46,13 +46,24 @@ async function getAllWine(range) {
   }
   var compare = new Date();
   console.log('Today is: ' + compare.toISOString());
-  compare = subHours(compare, delta);
+  compare = sub(compare, { hours: delta });
   console.log(range + ' ago: ' + compare.toISOString());
   var search = {"time": { $gt: compare}}; 
   // var search = {};
   console.log(search);
   const result = await db.collection("temps").find(search, {sort: [["time", "desc"]]}).toArray();
   // console.log(result);
+  return result;
+}
+
+async function getLogRecords(recent) {
+  const db = await dbPromise.then((client) => client.db("csci350"));
+  var compare = new Date();
+  compare = sub(compare, { months: recent });
+  var search = {"timeStamp": { "$gt": compare.getTime()}}; 
+  console.log(search);
+  const result = await db.collection("logrecords").find(search, {sort: [["timeStamp", "desc"]]}).toArray();
+  console.log(result);
   return result;
 }
 

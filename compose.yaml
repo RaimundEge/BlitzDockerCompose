@@ -12,6 +12,7 @@ services:
          - "8080:80"
       environment:
          - PMA_HOST=blitzdb
+         - PMA_ABSOLUTE_URI=https://blitz.cs.niu.edu/phpmyadmin
       restart: always
       depends_on:
          - blitzdb

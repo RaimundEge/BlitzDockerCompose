@@ -39,10 +39,10 @@ app.get("/refertemp", (request, response) => {
     getTemps(request, response);
 });
 // PortScanLog records
-app.get("/records", (request, response) => {
+app.get("/logrecords", (request, response) => {
     getScanLogRecords(request, response);
 });
-app.get("/record", (request, response) => {
+app.get("/logrecord", (request, response) => {
     getScanLogRecord(request, response);
 });
 // start the Express server

@@ -4,5 +4,8 @@ FROM mariadb:latest
 # Set the root password for MariaDB
 ENV MYSQL_ROOT_PASSWORD=risingsun
 
+# enable remote network access
+COPY .my.cnf /root/
+
 # Copy the backup script into the Docker image
-COPY backup-042024.sql /docker-entrypoint-initdb.d/
+COPY mysql.sql /docker-entrypoint-initdb.d/
