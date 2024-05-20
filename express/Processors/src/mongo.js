@@ -67,4 +67,12 @@ async function getLogRecords(recent) {
   return result;
 }
 
-export { find, insert, getAll, getAllWine };
+async function getLogRecord(id) { 
+  const db = await dbPromise.then((client) => client.db("csci350"));
+  const result = await db.collection(collection).findOne(id);
+  console.log(result)
+  return result;
+}
+
+
+export { find, insert, getAll, getAllWine, getLogRecords };
