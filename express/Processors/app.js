@@ -34,6 +34,7 @@ app.post("/purchaseorder", (request, response) => {
 app.get("/purchaseorder", (request, response) => {
     getAll("order").then((docs) => response.send(docs));
 });
+
 // Wine room temperature
 app.get("/refertemp", (request, response) => {
     getTemps(request, response);
@@ -42,6 +43,7 @@ app.get("/refertemp", (request, response) => {
 app.get("/logrecords", (request, response) => {
     getScanLogRecords(request, response);
 });
+
 app.get("/logrecord", (request, response) => {
     getScanLogRecord(request, response);
 });

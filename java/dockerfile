@@ -2,4 +2,5 @@ FROM openjdk:latest
 ENV TZ=America/Chicago
 WORKDIR /workdir/
 COPY DBUpdater /workdir/
+RUN javac DBUpdater.java
 CMD ./runDBUpdater

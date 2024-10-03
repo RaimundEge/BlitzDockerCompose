@@ -2,7 +2,6 @@
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 
 /**
  *
@@ -11,6 +10,7 @@ import java.util.Random;
 public class DBUpdater {
 
     static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
+    // static final String DB_URL = "jdbc:mariadb://localhost:3306/csci467";
     static final String DB_URL = "jdbc:mariadb://blitzdb:3306/csci467";
     static final String USER = "instructor";
     static final String PASS = "instructor";
@@ -20,13 +20,8 @@ public class DBUpdater {
      */
     public static void main(String[] args) throws Exception {
 
-        // create instance of Random class
-        Random rand = new Random();
-   
-        // Generate random integers in range 0 to 999
-        int flip = rand.nextInt(3);
-        String customer[] = {"Happy", "Disgruntled", "Return "};
-        String part[] = {"Stylish", "Modern", "Broken"};
+        String customer[] = {"New", "Happy", "Disgruntled", "Return ", "Old"};
+        String part[] = {"New", "Stylish", "Modern", "Broken", "Old"};
 
         Connection conn = null;
         Statement stmt = null;
@@ -40,9 +35,10 @@ public class DBUpdater {
 
             SimpleDateFormat format = new SimpleDateFormat("YY-MM-dd HH:mm");
             String timeStamp = format.format(new Date());
+            int flip = (int) (timeStamp.charAt(timeStamp.length()-1) - '0')/2;
 
             // update part
-            stmt.execute("UPDATE parts SET description='" + part[flip] + " Part: " + timeStamp + "' WHERE number=33;");
+            stmt.execute("UPDATE parts SET description='" + part[flip] + " Part: " + timeStamp + "', pictureURL='http://blitz.cs.niu.edu/pics/033-" + flip + ".jpg' WHERE number=33;");
             // update customer
             stmt.execute("UPDATE customers SET name='" + customer[flip] + " Customer: " + timeStamp + "' WHERE id=33;");
 
