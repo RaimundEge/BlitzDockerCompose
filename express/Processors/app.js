@@ -34,6 +34,9 @@ app.post("/purchaseorder", (request, response) => {
 app.get("/purchaseorder", (request, response) => {
     getAll("order").then((docs) => response.send(docs));
 });
+app.get("/error", (request, response) => {
+    getAll("error").then((docs) => response.send(docs));
+});
 
 // Wine room temperature
 app.get("/refertemp", (request, response) => {

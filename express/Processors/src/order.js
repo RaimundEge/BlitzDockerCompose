@@ -27,6 +27,7 @@ export default async (request, response) => {
     }
     if (errors.length > 0) {
         poData.errors = errors;
+        await insert("error", poData);
     }
     response.send(poData);
 };
