@@ -22,6 +22,7 @@ export default async (request, response) => {
     }
     if (errors.length > 0) {
         ccData.errors = errors;
+        await insert("error", ccData);
     }
     response.send(ccData);
 };
