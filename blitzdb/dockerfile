@@ -2,7 +2,8 @@
 FROM mariadb:latest
 
 # Set the root password for MariaDB
-ENV MYSQL_ROOT_PASSWORD=risingsun
+ENV MARIADB_ROOT_PASSWORD=risingsun
+ENV MARIADB_AUTO_UPGRADE=1
 
 # enable remote network access
 COPY .my.cnf /root/

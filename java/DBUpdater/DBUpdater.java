@@ -12,8 +12,8 @@ public class DBUpdater {
     static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
     // static final String DB_URL = "jdbc:mariadb://localhost:3306/csci467";
     static final String DB_URL = "jdbc:mariadb://blitzdb:3306/csci467";
-    static final String USER = "instructor";
-    static final String PASS = "instructor";
+    static final String USER = "processor";
+    static final String PASS = "processor";
 
     /**
      * @param args the command line arguments

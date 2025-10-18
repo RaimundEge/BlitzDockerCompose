@@ -1,3 +1,9 @@
+// Oct 2025 reorganization
+remove database csci350, portscan logrecords moved to mongodb
+truncate Encrypt>encrypt_hello table
+current databases: csci467, Encrypt, Payroll
+
+
 // May 8 2024 reorganization
 # Add Docker's official GPG key:
 sudo apt-get update
