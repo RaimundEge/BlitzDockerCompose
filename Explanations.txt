@@ -2,6 +2,7 @@
 remove database csci350, portscan logrecords moved to mongodb
 truncate Encrypt>encrypt_hello table
 current databases: csci467, Encrypt, Payroll
+root access via: mariadb -h 172.18.0.2 -u root -p
 
 
 // May 8 2024 reorganization
